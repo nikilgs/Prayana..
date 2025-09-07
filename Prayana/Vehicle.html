@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vehicle Booking</title>
+    <link rel="shortcut icon" href="https://t3.ftcdn.net/jpg/01/92/21/40/360_F_192214085_QnQ58x0ZKRLSUEgarcjVHNWrnmH8uWTA.jpg" type="image/x-icon">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #f5f7fa 0%, #e4efe9 100%);
+            color: #333;
+            line-height: 1.6;
+            padding: 20px;
+            min-height: 100vh;
+        }
+        
+        .z {
+            text-align: center;
+            margin: 30px 0;
+            padding: 20px;
+        }
+        
+        .z h1 {
+            font-size: 3.2rem;
+            color: #2c3e50;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+            position: relative;
+            display: inline-block;
+            padding-bottom: 15px;
+        }
+        
+        .z h1:after {
+            content: '';
+            position: absolute;
+            width: 80px;
+            height: 5px;
+            background: linear-gradient(90deg, #3498db, #2ecc71);
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            border-radius: 3px;
+        }
+        
+        .a {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        .b, .c, .d, .e, .f {
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+        }
+        
+        .b:hover, .c:hover, .d:hover, .e:hover, .f:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
+        }
+        
+        .b:before, .c:before, .d:before, .e:before, .f:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 5px;
+            background: linear-gradient(90deg, #3498db, #2ecc71);
+        }
+        
+        img {
+            width: 100%;
+            height: 220px;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+            padding: 15px;
+        }
+        
+        .b:hover img, .c:hover img, .d:hover img, .e:hover img, .f:hover img {
+            transform: scale(1.05);
+        }
+        
+        h3 {
+            padding: 20px;
+            text-align: center;
+            font-size: 1.4rem;
+            color: #2c3e50;
+            background: #f8f9fa;
+            margin-top: auto;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-top: 1px solid #eee;
+        }
+        
+        h3 i {
+            margin-right: 10px;
+            color: #3498db;
+        }
+        
+        /* Vehicle type labels */
+        .b:after {
+            content: 'Swift Desire';
+        }
+        
+        .c:after {
+            content: 'Innova Crysta';
+        }
+        
+        .d:after {
+            content: 'Fortuner';
+        }
+        
+        .e:after {
+            content: 'Tempo Traveller';
+        }
+        
+        .f:after {
+            content: 'Luxury Coach';
+        }
+        
+        .b:after, .c:after, .d:after, .e:after, .f:after {
+            position: absolute;
+            top: 15px;
+            right: 0;
+            background: linear-gradient(90deg, #3498db, #2ecc71);
+            color: white;
+            padding: 8px 15px;
+            font-weight: bold;
+            font-size: 0.9rem;
+            border-radius: 20px 0 0 20px;
+            box-shadow: -2px 2px 5px rgba(0,0,0,0.2);
+        }
+        
+        /* Booking button */
+        .b h3:after, .c h3:after, .d h3:after, .e h3:after, .f h3:after {
+            content: 'Book Now';
+            display: inline-block;
+            background: #2ecc71;
+            color: white;
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            margin-left: 15px;
+            transition: background 0.3s ease;
+            cursor: pointer;
+        }
+        
+        .b h3:hover:after, .c h3:hover:after, .d h3:hover:after, .e h3:hover:after, .f h3:hover:after {
+            background: #27ae60;
+        }
+        
+        /* Responsive design */
+        @media (max-width: 768px) {
+            .a {
+                grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+                gap: 20px;
+            }
+            
+            .z h1 {
+                font-size: 2.5rem;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .z h1 {
+                font-size: 2rem;
+            }
+            
+            .a {
+                grid-template-columns: 1fr;
+            }
+            
+            h3 {
+                font-size: 1.2rem;
+                padding: 15px;
+            }
+        }
+        
+        /* Animation for page load */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .b, .c, .d, .e, .f {
+            animation: fadeIn 0.8s ease-out;
+        }
+        
+        .b { animation-delay: 0.1s; }
+        .c { animation-delay: 0.2s; }
+        .d { animation-delay: 0.3s; }
+        .e { animation-delay: 0.4s; }
+        .f { animation-delay: 0.5s; }
+        
+        /* Footer styling */
+        .footer {
+            margin-top: 50px;
+            text-align: center;
+            padding: 30px;
+            color: #7f8c8d;
+            font-size: 1rem;
+            border-top: 1px solid #ddd;
+            background: white;
+            border-radius: 12px;
+            max-width: 1400px;
+            margin-left: auto;
+            margin-right: auto;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+        }
+        
+        .footer p {
+            margin: 10px 0;
+        }
+        
+        .footer i {
+            color: #e74c3c;
+            margin: 0 5px;
+        }
+        
+        /* Contact info */
+        .contact-info {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-top: 20px;
+            flex-wrap: wrap;
+        }
+        
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .contact-item i {
+            color: #3498db;
+            font-size: 1.2rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="z"><h1>Vehicle Booking</h1></div>
+    
+    <div class="a">
+        <div class="b">
+            <img src="./shift.jpg" alt="Swift Desire">
+            <h3><i class="fas fa-tag"></i> Per Day Rent: 3000₹</h3>
+        </div>
+
+        <div class="c">
+            <img src="https://static.vecteezy.com/system/resources/previews/017/281/509/non_2x/toyota-innova-crysta-top-model-2393cc-automatic-transmission-turbo-engine-6-speed-gear-free-png.png" alt="Innova Crysta">
+            <h3><i class="fas fa-tag"></i> Per Day Rent: 5000₹</h3>
+        </div>
+        
+        <div class="d">
+            <img src="./for.jpg" alt="Fortuner">
+            <h3><i class="fas fa-tag"></i> Per Day Rent: 10000₹</h3>
+        </div>
+        
+        <div class="e">
+            <img src="https://cdn.bluebirdtravels.in/wp-content/uploads/2017/01/Tempo_Traveller_PI.png" alt="Tempo Traveller">
+            <h3><i class="fas fa-tag"></i> Per Day Rent: 15000₹</h3>
+        </div>
+        
+        <div class="f">
+            <img src="https://sdmntprcentralus.oaiusercontent.com/files/00000000-fd08-61f5-b08e-8543375dac20/raw?se=2025-07-23T10%3A18%3A27Z&sp=r&sv=2024-08-04&sr=b&scid=37c7d044-a58d-53e5-b016-099dd435a711&skoid=24a7dec3-38fc-4904-b888-8abe0855c442&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skt=2025-07-22T23%3A52%3A34Z&ske=2025-07-23T23%3A52%3A34Z&sks=b&skv=2024-08-04&sig=iaBgs5ZLw/yeNWBXgLYWscFLozsc80KCTP/ULCyBi8I%3D" alt="Luxury Coach">
+            <h3><i class="fas fa-tag"></i> Per Day Rent: 20000₹</h3>
+        </div>
+    </div>
+
+    <div class="footer">
+        <p>© 2023 Vehicle Booking Service | Your trusted travel partner</p>
+        <p>Designed with <i class="fas fa-heart"></i> for your convenience</p>
+        
+        <div class="contact-info">
+            <div class="contact-item">
+                <i class="fas fa-phone"></i>
+                <span>+91 98765 43210</span>
+            </div>
+            <div class="contact-item">
+                <i class="fas fa-envelope"></i>
+                <span>info@vehiclebooking.com</span>
+            </div>
+            <div class="contact-item">
+                <i class="fas fa-map-marker-alt"></i>
+                <span>Bangalore, India</span>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        // Simple animation on scroll
+        document.addEventListener('DOMContentLoaded', function() {
+            const vehicles = document.querySelectorAll('.b, .c, .d, .e, .f');
+            
+            // Add intersection observer for scroll animations
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = 1;
+                    }
+                });
+            }, { threshold: 0.1 });
+            
+            vehicles.forEach(vehicle => {
+                vehicle.style.opacity = 0;
+                vehicle.style.transition = 'opacity 0.8s ease-out';
+                observer.observe(vehicle);
+            });
+            
+            // Add click event to "Book Now" buttons
+            document.querySelectorAll('h3').forEach(item => {
+                item.addEventListener('click', function(e) {
+                    if (e.target.tagName === 'H3' || e.target.tagName === 'I') {
+                        const vehicleType = this.parentNode.querySelector('img').alt;
+                        alert(`Booking request for: ${vehicleType}`);
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
